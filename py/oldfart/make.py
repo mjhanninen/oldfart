@@ -15,8 +15,8 @@ FAILURE = 4
 class Maker(object):
 
     def __init__(self, project_dir='.', makefile='Makefile'):
-        self._project_dir = os.path.abspath(project_dir)
-        self._makefile = os.path.abspath(os.path.join(project_dir, makefile))
+        self.project_dir = os.path.abspath(project_dir)
+        self.makefile = os.path.abspath(os.path.join(project_dir, makefile))
 
     def make(self, target):
         """Runs `make(1)` on `target` and returning a tuple `(status, output)`
@@ -32,8 +32,8 @@ class Maker(object):
         """
         try:
             capture = subprocess.check_output(
-                ['make', '--makefile=' + self._makefile, target],
-                cwd=self._project_dir, stderr=subprocess.STDOUT,
+                ['make', '--makefile=' + self.makefile, target],
+                cwd=self.project_dir, stderr=subprocess.STDOUT,
                 universal_newlines=True)
             if re.match(r"make: `[^']*' is up to date.", capture):
                 return (NOTHING_DONE, capture)

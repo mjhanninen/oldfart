@@ -8,8 +8,9 @@ __all__ = ['make_http_request_handler_class']
 
 
 def _send_head(self):
+    # FIXME: We die here if the directory doesn't exist ('make clean' anyone?)
     path = self.translate_path(self.path)
-    target = os.path.relpath(path, os.getcwd())
+    target = os.path.relpath(path, self.maker.project_dir)
     if not os.path.isdir(path):
         retval, output = self.maker.make(target)
         if retval == oldfart.make.FAILURE:
