@@ -3,4 +3,5 @@
 /.ve/
 /build/
 /dist/
+/example/
 dev_requirements.txt
