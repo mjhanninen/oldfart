@@ -1,0 +1,49 @@
+#!/bin/bash
+
+# Sets up a virtual environment for the project (in case there wasn't one
+# already) and activates it. Installs dependencies listed in requirements.txt
+# and dev_requirements.txt and amends the environment with some minor project
+# specifics.
+
+if [[ -n "$VIRTUAL_ENV" ]]
+then
+    echo "Virtual environment already activated (press ^D to exit)."
+    exit 1
+fi
+
+project_root=$(cd $(dirname ${BASH_SOURCE[0]})/.. && pwd)
+
+(
+    cd $project_root
+    [[ ! -e ./.ve ]] && pyvenv .ve
+)
+
+VIRTUAL_ENV_DISABLE_PROMPT=${VIRTUAL_ENV_DISABLE_PROMPT:1}
+source "$project_root/.ve/bin/activate"
+
+function install_requirements {
+    (
+        cd $project_root
+        if [[ -e "$1" ]]
+        then
+            fingerprint_file=".ve/$1.md5"
+            touch "$fingerprint_file"
+            old_fingerprint=$(cat "$fingerprint_file")
+            new_fingerprint=$(md5 -q "$1")
+            if [[ $old_fingerprint != $new_fingerprint ]]
+            then
+                echo "Updating dependencies from $1"
+                pip install -r "$1"
+                echo $new_fingerprint > "$fingerprint_file"
+            fi
+        fi
+    )
+}
+
+install_requirements "requirements.txt"
+install_requirements "dev_requirements.txt"
+
+export PYTHONPATH="$project_root/py:$PYTHONPATH"
+
+echo "Virtual environment activated. Press ^D to exit."
+exec $SHELL
