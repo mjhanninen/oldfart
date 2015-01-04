@@ -33,7 +33,7 @@ function install_requirements {
             if [[ $old_fingerprint != $new_fingerprint ]]
             then
                 echo "Updating dependencies from $1"
-                pip install -r "$1"
+                pip install --log .ve/pip.log -r "$1"
                 echo $new_fingerprint > "$fingerprint_file"
             fi
         fi
