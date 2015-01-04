@@ -22,8 +22,9 @@ def _send_head(self):
     if not os.path.isdir(path):
         retval, output = self.maker.make(target)
         if retval == oldfart.make.FAILURE:
-            self.log_error('Building resource failed:\n%s', output)
-            self.send_error(500, 'Could not generate resource')
+            self.log_error('Building resource "%s" failed:\n%s', self.path, output.rstrip())
+            self.send_error(500, 'Could not generate resource. See server log '
+                                 'for details')
             return None
         elif retval == oldfart.make.NO_RULE:
             self.log_message('No rule for building the resource')
