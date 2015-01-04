@@ -29,6 +29,9 @@ directory `build/dist/` inside the project via the port 8080.
     $ oldfart --serve-from=build/dist/ --port=8080
     Serving "path/to/your/project/build/dist" through 127.0.0.1:8080
 
+Please see the working example in `example/` directory for further
+information.
+
 
 Installation
 ------------
