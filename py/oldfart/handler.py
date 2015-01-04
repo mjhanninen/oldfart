@@ -15,6 +15,7 @@ def _send_head(self):
         retval, output = self.maker.make(target)
         if retval == oldfart.make.FAILURE:
             self.send_error(500, 'Could not generate resource')
+            return None
     return super(self.__class__, self).send_head()
 
 def make_http_request_handler_class(name, maker):
