@@ -12,6 +12,11 @@ NO_RULE = 3
 FAILURE = 4
 
 
+def _occur(fmt, needle, haystack):
+    return bool(re.search(('^' + fmt + '$').format(needle),
+                          haystack, re.MULTILINE))
+
+
 class Maker(object):
 
     def __init__(self, project_dir='.', makefile='Makefile'):
@@ -35,13 +40,13 @@ class Maker(object):
                 ['make', '--makefile=' + self.makefile, target],
                 cwd=self.project_dir, stderr=subprocess.STDOUT,
                 universal_newlines=True)
-            if re.match(r"make: `[^']*' is up to date.", capture):
+            if _occur("make: `{:s}' is up to date.", target, capture):
                 return (NOTHING_DONE, capture)
             else:
                 return (SUCCESS, capture)
         except subprocess.CalledProcessError as e:
-            if re.match(r"make: \*\*\* No rule to make target `{:s}'.  Stop."
-                        .format(target), e.output):
+            if _occur(r"make: \*\*\* No rule to make target `{:s}'.  Stop.",
+                      target, e.output):
                 return (NO_RULE, e.output)
             else:
                 return (FAILURE, e.output)
