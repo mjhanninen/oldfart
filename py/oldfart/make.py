@@ -3,7 +3,7 @@ import re
 import subprocess
 
 
-__all__ = ['NOOP', 'SUCCESS', 'FAIL', 'Maker']
+__all__ = ['NOTHING_DONE', 'SUCCESS', 'NO_RULE', 'FAILURE', 'Maker']
 
 
 NOTHING_DONE = 1
