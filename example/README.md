@@ -9,8 +9,10 @@ organize your project or fashion your makefile.
 Dependencies
 ------------
 
-- [`qrcode` Python package][https://pypi.python.org/pypi/qrcode/5.0.1]
-- [Google Closure Compiler][https://github.com/google/closure-compiler]
+You need the following two executables on your `PATH`:
+
+- `qr` from the Python package `qrcode` (see the note below)
+- `closure-compiler` i.e. the Google Closure Compiler
 
 
 Usage
@@ -24,12 +26,11 @@ you can run this example as follows:
     $ cd example
     $ python -m oldfart --serve-from build/dist
 
-After which you can point your browser to
-[`http://localhost:8000/index.html`][http://localhost:8000/index.html].
+After which you can point your browser to `http://localhost:8000/index.html`.
 
 
 ### Note about qrcode ###
 
-Unfortunately the Python package `qrcode` is not Python 3 compatible
-yet. Therefore you need to install it separately outside Oldfart's virtual
-environment.
+Unfortunately the Python package `qrcode` is not yet Python 3
+compatible. Therefore you need to install it separately outside Oldfart's
+virtual environment.
