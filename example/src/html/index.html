@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, user-scalable=no" />
+    <title>Get yourself a presonalized QR!</title>
+    <link href="/s/master.css" media="screen" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="/s/md5.js"></script>
+    <script type="text/javascript" src="/s/app-min.js"></script>
+  </head>
+  <body>
+    <div class="page-wrapper">
+      <h1>Get yourself a personalized QR for FREE!</h1>
+      <p>(Don't press <a href="norule.html">this</a> or
+        <a href="bomb.html">this</a> link! The former is broken and the latter
+        trips the backend.)</p>
+      <form>
+        <label for="qr-seed"> Seed your individual QR with something very
+        close to your hear:</label>
+        <textarea id="qr-seed"
+                  autocapitalized="off"
+                  autocorrect="off"
+                  autofocus="on"
+                  cols="60" rows="10"
+                  onclick="this.select()"
+                  onkeyup="fetchQrSoon()">Phlebas the Phoenician, a fortnight dead,
+Forgot the cry of gulls, and the deep sea swell
+And the profit and loss.
+    A current under sea
+Picked his bones in whispers. As he rose and fell
+He passes the stages of his age and youth
+Entering the whirlpool.
+    Gentile or Jew
+O you who turn the wheel and look windward,
+Consider Phlebas, who was once handsome and tall as you.
+        </textarea>
+      </form>
+      <div class="qr-holder">
+        <img src="/s/yle.jpg" id="qr-image" />
+      </div>
+    </div>
+    <script type="text/javascript">
+      fetchQrNow();
+    </script>
+  </body>
+</html>
